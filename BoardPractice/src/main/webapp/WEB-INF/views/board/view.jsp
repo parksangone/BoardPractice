@@ -51,6 +51,8 @@
 			<td>${view.name}</td>
 			<td>${view.title}</td>
 			<td>${view.content}</td>
+			<td>${view.bDate}</td>
+			<td>${view.hit}</td>
 		</tr>
 	</table>
 	

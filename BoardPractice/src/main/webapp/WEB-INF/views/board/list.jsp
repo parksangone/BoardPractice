@@ -24,7 +24,7 @@
 </script>
 </head>
 <body>
-	게시판 리스트 <br>
+	게시판 리스트 
 	<table width="500" border="1">
 		<tr >
 			<td>번호</td>
@@ -32,6 +32,8 @@
 			<td>작성자</td>
 			<td>제목</td>
 			<td>내용</td>
+			<td>작성일</td>
+			<td>조회수</td>
 		</tr>
 		<c:forEach items="${list}" var="dto">
 			<tr style="cursor:pointer" onclick="location.href='view?bId=${dto.bId}'">
@@ -40,6 +42,8 @@
 				<td>${dto.name}</td>
 				<td>${dto.title}</td>
 				<td>${dto.content}</td>
+				<td>${dto.bDate}</td>
+				<td>${dto.hit}</td>
 			</tr>
 		<br>
 		</c:forEach>

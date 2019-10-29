@@ -21,6 +21,23 @@
 		$('#name').val('<%=name%>');
 	});
 	
+	//폼체크
+	function formCheck() {
+	 
+		if($('#title').val() == "") {
+			alert("제목을 입력해주세요.");
+			$('#title').focus();
+			return;
+		} else if($('#content').val() == "") {
+			alert("내용을 입력해주세요");
+			$('#content').focus();
+			return;
+		}
+	
+		writeDo();
+	}
+	
+	
 	// 글작성 
 	function writeDo() {
  		 $.ajax({
@@ -34,7 +51,6 @@
 	            },
 	        });
 	}
-	
 </script>
 </head>
 <body>
@@ -43,9 +59,9 @@
 	<form id="writeForm">
 		<input type="hidden" id="id" name="id" size="10"><br>
 		<input type="hidden" id="name" name="name" size="10"><br>
-		제목 : <input type="text" name="title" size="50"><br>
-		내용 : <textarea style="resize:none" name="content" cols="50" rows="10"></textarea><br>
+		<input type="text" id="title" name="title" size="50" placeholder="제목을 입력해주세요."><br><br>
+		<textarea style="resize:none" id="content" name="content" cols="50" rows="10" placeholder="내용을 입력해주세요."></textarea><br>
 	</form>
-	 <input type="button" onclick="writeDo()" value="글작성">
+	 <input type="button" onclick="formCheck()" value="글작성">
 </body>
 </html>

@@ -8,6 +8,24 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script>
+	
+
+	//폼체크
+	function formCheck() {
+ 
+		if($('#title').val() == "") {
+			alert("제목을 입력해주세요.");
+			$('#title').focus();
+			return;
+		} else if($('#content').val() == "") {
+			alert("내용을 입력해주세요");
+			$('#content').focus();
+			return;
+		}
+
+		modifyDo();
+	}
+
 	//글수정 
 	function modifyDo() {
 		 $.ajax({
@@ -25,12 +43,12 @@
 </head>
 <body>
 	게시판 수정
-	<a href="list">게시판</a><br>
+	<a href="list">게시판</a><br><br><br>
 	<form id="modifyForm">
 		<input type="hidden" name="bId" value="${view.bId}">
-		제목 : <input type="text" name="title" size="50" value="${view.title}"><br>
-		내용 : <textarea style="resize:none" name="content" cols="50" rows="10">${view.content}</textarea><br>
+		<input type="text" id="title" name="title" size="50" value="${view.title}"  placeholder="제목을 입력해주세요."><br><br>
+		<textarea style="resize:none" id="content" name="content" cols="50" rows="10"  placeholder="내용을 입력해주세요.">${view.content}</textarea><br>
 	</form>
-	 <input type="button" onclick="modifyDo()" value="수정">
+	 <input type="button" onclick="formCheck()" value="수정">
 </body>
 </html>
