@@ -6,7 +6,13 @@
 <mapper namespace="com.study.board.dao.BoardDao">
 	
 	<select id="selectList" resultType="com.study.board.dto.BoardDto">
-		select * from board order by bid desc
+		<![CDATA[  
+		select * from (
+		   select rownum num, A.* from (
+        		select * from board order by bId desc) A
+    		where rownum <= (#{curPage}-1) * #{listCount} + #{listCount} ) B
+		where B.num >= (#{curPage}-1) * #{listCount} + 1
+		]]>
 	</select>
 	
 	<select id="selectView" resultType="com.study.board.dto.BoardDto">
@@ -27,5 +33,15 @@
 		 title = #{title}, content=#{content}
 		 where bId = #{bId}
 	</update>
+	
+	<update id="upHit" parameterType="com.study.board.dto.BoardDto">
+		update board set
+		 hit = hit + 1
+		 where bId = #{bId}
+	</update>
+	
+	<select id="selectPageCount" resultType="int">  
+		select count(*) from board
+	</select>	
 	
 </mapper>

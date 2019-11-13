@@ -4,17 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.study.board.dao.BoardDao;
 import com.study.board.dto.BoardDto;
+import com.study.board.pageInfo.PageInfo;
 
 @Controller
 @RequestMapping("/board")
@@ -25,23 +26,38 @@ public class BoardController {
 	
 	// 게시글 리스트 화면
 	@RequestMapping("/list")
-	public String board(Model model) {
-		// 게시글 전체 목록 가져오기
+	public String board(Model model, PageInfo pageInfo) {
+		// 게시글 해당 페이지 글 목록 가져오기
 		BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
-				
-		model.addAttribute("list", boardDao.selectList());
-				
+		pageInfo.setTotalCount(boardDao.selectPageCount());
+							
+		model.addAttribute("list", boardDao.selectList(pageInfo));
+		model.addAttribute("pageInfo", pageInfo);
+		
 		return "board/list";
 	}
 	
 	// 게시글 상세보기 화면
 	@RequestMapping("/view")
-	public String boardView(Model model, BoardDto boardDto) {
+	public String boardView(Model model, BoardDto boardDto, HttpServletRequest request) {
 				
-		// 해당 게시글 가져오기
+		HttpSession session = request.getSession();
+		
+		String userId = (String) session.getAttribute("id");
+		
 		BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
 		
-		model.addAttribute("view", boardDao.selectView(boardDto.getbId()));
+		// boardDto에 해당 게시글 정보 저장
+		boardDto = boardDao.selectView(boardDto.getbId());
+		
+		// 조회수 증가 (작성자가 아닐 때)
+		if(userId==null || !userId.equals(boardDto.getId())) {
+			boardDao.upHit(boardDto);
+			boardDto.setHit(boardDto.getHit() + 1);
+		}
+		
+		// model에 해당 게시글 정보를 담아 view로 보내기
+		model.addAttribute("view", boardDto);
 					
 		return "board/view";
 	}
@@ -63,31 +79,6 @@ public class BoardController {
 		model.addAttribute("view", boardDao.selectView(boardDto.getbId()));
 						
 		return "board/modify";
-	}
-	
-	// 게시글 리스트 가져오기
-	@RequestMapping("/selectList")
-	public @ResponseBody Map<String, Object> selectList(Model model) {
-		
-		// 게시글 전체 목록 가져오기
-		BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
-		
-		Map<String, Object> map = new HashMap<>(); 
-		map.put("list", boardDao.selectList());
-		
-		return map;
-	}
-	
-	// 해당 게시글 가져오기
-	@RequestMapping("/selectDo")
-	public @ResponseBody Map<String, Object> selectDo(Model model, BoardDto boardDto) {
-
-		BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
-		
-		Map<String, Object> map = new HashMap<>(); 
-		map.put("view",boardDao.selectView(boardDto.getbId()));
-			
-		return map;
 	}
 	
 	// 게시글 작성

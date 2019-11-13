@@ -1,6 +1,6 @@
 package com.study.board.dto;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 import lombok.Data;
 
@@ -11,14 +11,14 @@ public class BoardDto {
 	private String name;
 	private String title;
 	private String content;
-	private Timestamp bDate;
+	private Date bDate;
 	private int hit;
 	
 	public BoardDto() {
 		super();
 	}
 	
-	public BoardDto(int bId, String id, String name, String title, String content, Timestamp bDate, int hit) {
+	public BoardDto(int bId, String id, String name, String title, String content, Date bDate, int hit) {
 		super();
 		this.bId = bId;
 		this.id = id;
@@ -39,11 +39,11 @@ public class BoardDto {
 		this.bId = bId;
 	}
 
-	public Timestamp getbDate() {
+	public Date getbDate() {
 		return bDate;
 	}
 
-	public void setbDate(Timestamp bDate) {
+	public void setbDate(Date bDate) {
 		this.bDate = bDate;
 	}
 
