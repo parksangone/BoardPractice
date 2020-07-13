@@ -32,7 +32,7 @@
 	            dataType : 'json',
 	            success : function(data){
 	                alert(data.result);
-	                window.location.replace("list");
+	                window.location.replace("/board/list");
 	            },
 	        });
 	}
@@ -56,7 +56,7 @@
 		</tr>
 	</table>
 	
-	<a class="oneself" href="modify?bId=${view.bId}">수정하기</a>
+	<a class="oneself" href="/board/modify?bId=${view.bId}">수정하기</a>
 	<a class="oneself" style="cursor:pointer" onclick="deleteDo(${view.bId})">삭제하기</a>
 </body>
 </html>

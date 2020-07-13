@@ -139,7 +139,7 @@ public class BoardController {
 			message = "실패";
 		}
 			
-		Map<String, Object> map = new HashMap<>(); 
+		Map<String, Object> map = new HashMap<String, Object>(); 
 		map.put("result", message);
 				
 		return map;

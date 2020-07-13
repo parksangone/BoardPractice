@@ -56,7 +56,7 @@ public class UserController {
 			sResult = "fail";
 		}
 		
-		Map<String, Object> map = new HashMap<>(); 
+		Map<String, Object> map = new HashMap<String, Object>(); 
 		map.put("message", message);
 		map.put("result", sResult);
 		
@@ -79,7 +79,7 @@ public class UserController {
 			message = "실패";
 		}
 		
-		Map<String, Object> map = new HashMap<>(); 
+		Map<String, Object> map = new HashMap<String, Object>(); 
 		map.put("result", message);
 			
 		return map;	
@@ -111,7 +111,7 @@ public class UserController {
 			result = "fail";
 		}
 			
-		Map<String, Object> map = new HashMap<>(); 
+		Map<String, Object> map = new HashMap<String, Object>(); 
 		map.put("message", message);
 		map.put("result", result);
 			

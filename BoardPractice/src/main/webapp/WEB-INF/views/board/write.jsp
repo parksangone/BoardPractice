@@ -47,7 +47,7 @@
 	            dataType : 'json',
 	            success : function(data){
 	                alert(data.result);
-	                window.location.replace("list");
+	                window.location.replace("board/list");
 	            },
 	        });
 	}
@@ -55,7 +55,8 @@
 </head>
 <body>
 	게시판 글 작성 <br>
-	
+	<a href="/">HOME</a>
+	<a href="/board/list">게시판</a><br>
 	<form id="writeForm">
 		<input type="hidden" id="id" name="id" size="10"><br>
 		<input type="hidden" id="name" name="name" size="10"><br>

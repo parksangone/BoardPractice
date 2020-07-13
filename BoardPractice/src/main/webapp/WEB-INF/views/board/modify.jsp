@@ -35,15 +35,16 @@
             dataType : 'json',
             success : function(data){
                 alert(data.result);
-                window.location.replace("view?bId=${view.bId}");
+                window.location.replace("/board/view?bId=${view.bId}");
             },
         });
 	}	
 </script>
 </head>
 <body>
-	게시판 수정
-	<a href="list">게시판</a><br><br><br>
+	게시판 수정 
+	<a href="/">HOME</a>
+	<a href="/board/list">게시판</a><br><br><br>
 	<form id="modifyForm">
 		<input type="hidden" name="bId" value="${view.bId}">
 		<input type="text" id="title" name="title" size="50" value="${view.title}"  placeholder="제목을 입력해주세요."><br><br>

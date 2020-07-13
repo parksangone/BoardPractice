@@ -50,6 +50,6 @@
 		password : <input type="password" id="password" name="password" size="10"><br>
 	</form>
 	 <input type="button" onclick="formCheck()" value="로그인">
-	
+	<a href="/">HOME</a>
 </body>
 </html>

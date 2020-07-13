@@ -45,6 +45,5 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <a href="board/list">게시판</a><br>
-<a href="test">테스트</a> 
 </body>
 </html>

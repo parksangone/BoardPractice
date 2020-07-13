@@ -72,7 +72,7 @@
 	            dataType : 'json',
 	            success : function(data){
 	                alert(data.result);
-	                window.location.replace("login");
+	                window.location.replace("/user/login");
 	            },
 	        });
 	}
@@ -89,6 +89,6 @@
 		name : <input type="text" name="name" id="name" size="10"><br>
 	</form>
 	 <input type="button" onclick="formCheck()" value="회원가입">
-	
+	<a href="/">HOME</a>
 </body>
 </html>

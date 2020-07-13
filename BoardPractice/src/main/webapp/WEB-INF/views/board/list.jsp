@@ -15,8 +15,6 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script>
 	$(document).ready(function () {
-		selectListDo(1)
-		
 		// 비로그인시 글작성 a태그(글작성) 삭제
 		if("<%=loginStatus%>" != "YES") {
 			$('.member').remove();
@@ -24,14 +22,12 @@
 		
 	});
 	
-	function test() {
-		alert("d")
-	}
-	
 </script>
 </head>
 <body>
-	게시판 리스트 <br><br>
+	게시판 리스트 <br>
+	<a href="/">HOME</a> <br>
+	
 	<table id="listTable" border="1"> 
 		<tr>
 			<td>번호</td>
@@ -54,11 +50,11 @@
 	</table>
 	<br>
 	<div id="paging">
-		<a href="/board/list?curPage=${pageInfo.curPage - 1}">◀</a> 
+		<a style="text-decoration:none" href="/board/list?curPage=${pageInfo.curPage - 1}">◀</a> 
 		<c:forEach var="page" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1">
-			<a href="/board/list?curPage=${page}">${page}</a>
+			<a style="text-decoration:none" href="/board/list?curPage=${page}">${page}</a>
 		</c:forEach>
-		<a href="/board/list?curPage=${pageInfo.curPage + 1}">▶</a>
+		<a style="text-decoration:none" href="/board/list?curPage=${pageInfo.curPage + 1}">▶</a>
 	</div>
 	
 	<br>
