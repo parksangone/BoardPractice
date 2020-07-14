@@ -13,15 +13,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.study.board.service.IBoardService;
 import com.study.user.dao.UserDao;
 import com.study.user.dto.UserDto;
+import com.study.user.service.IUserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
-	private SqlSession sqlSession;
+	IUserService userService;
 	
 	// 사용자 로그인 화면
 	@RequestMapping("/login")
@@ -41,12 +43,10 @@ public class UserController {
 	@RequestMapping("/idCheck")
 	public @ResponseBody Map<String, Object> idCheck(Model model, UserDto userDto) {
 
-		UserDao userDao = sqlSession.getMapper(UserDao.class);
-			
 		String message = "";
 		String sResult = "";
 			
-		int result = userDao.idCheck(userDto);
+		int result = userService.idCheck(userDto);
 		
 		if(result == 0) {
 			message = "사용할 수 있는 아이디 입니다.";
@@ -67,11 +67,9 @@ public class UserController {
 	@RequestMapping("/joinDo")
 	public @ResponseBody Map<String, Object> joinDo(Model model, UserDto userDto) {
 
-		UserDao userDao = sqlSession.getMapper(UserDao.class);
-		
 		String message = "";
 		
-		int result = userDao.insertUser(userDto);
+		int result = userService.insertUser(userDto);
 		
 		if(result == 1) {
 			message = "성공";
@@ -91,12 +89,10 @@ public class UserController {
 
 		HttpSession session = request.getSession();
 		
-		UserDao userDao = sqlSession.getMapper(UserDao.class);
-			
 		String message = "";
 		String result = "";
 			
-		userDto = userDao.loginUser(userDto);
+		userDto = userService.loginUser(userDto);
 			
 		if(userDto != null) {
 			message = "성공";

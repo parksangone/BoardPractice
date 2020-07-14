@@ -47,7 +47,7 @@
 	            dataType : 'json',
 	            success : function(data){
 	                alert(data.result);
-	                window.location.replace("board/list");
+	                window.location.replace("/board/list");
 	            },
 	        });
 	}
