@@ -19,9 +19,10 @@ public class BoardService implements IBoardService {
 	// 게시글 리스트 가져오기
 	@Override
 	public List<BoardDto> selectList(PageInfo pageInfo) {
+		
 		// 게시글 해당 페이지 글 목록 가져오기
 		BoardDao boardDao = sqlSession.getMapper(BoardDao.class);
-		pageInfo.setTotalCount(boardDao.selectPageCount());
+		pageInfo.setTotalCount(boardDao.selectPageCount(pageInfo));
 		
 		return boardDao.selectList(pageInfo);
 	}

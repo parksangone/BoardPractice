@@ -12,6 +12,8 @@ public class PageInfo {
 	private int startPage;			// 시작 페이지
 	private int endPage;			// 끝 페이지
 	
+	private String search; // 검색내용
+	
 	// 총 게시물 저장 및 변수 세팅
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;

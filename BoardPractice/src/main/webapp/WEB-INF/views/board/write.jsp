@@ -58,8 +58,8 @@
 	<a href="/">HOME</a>
 	<a href="/board/list">게시판</a><br>
 	<form id="writeForm">
-		<input type="hidden" id="id" name="id" size="10"><br>
-		<input type="hidden" id="name" name="name" size="10"><br>
+		<input type="hidden" id="id" name="id"><br>
+		<input type="hidden" id="name" name="name"><br>
 		<input type="text" id="title" name="title" size="50" placeholder="제목을 입력해주세요."><br><br>
 		<textarea style="resize:none" id="content" name="content" cols="50" rows="10" placeholder="내용을 입력해주세요."></textarea><br>
 	</form>

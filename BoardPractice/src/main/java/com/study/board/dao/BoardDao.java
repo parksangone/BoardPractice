@@ -12,5 +12,6 @@ public interface BoardDao {
 	public int deleteBoard(BoardDto boardDto);
 	public int modifyBoard(BoardDto boardDto);
 	public int upHit(BoardDto boardDto);
-	public int selectPageCount();
+	public int selectPageCount(PageInfo pageInfo);
+	public List<BoardDto> searhBoard(PageInfo pageInfo);
 } 

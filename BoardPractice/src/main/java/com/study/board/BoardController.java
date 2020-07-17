@@ -25,7 +25,11 @@ public class BoardController {
 	
 	// 게시글 리스트 화면
 	@RequestMapping("/list")
-	public String board(Model model, PageInfo pageInfo) {
+	public String board(Model model, PageInfo pageInfo, HttpServletRequest request) {
+		// 검색어 pageInfo에 저장
+		String search = request.getParameter("search") == null?"":request.getParameter("search");
+		pageInfo.setSearch(search);
+		
 		model.addAttribute("list", boardService.selectList(pageInfo));
 		model.addAttribute("pageInfo", pageInfo);
 		
@@ -124,4 +128,5 @@ public class BoardController {
 				
 		return map;
 	}
+
 }

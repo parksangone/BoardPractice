@@ -10,7 +10,8 @@
 		select * from (
 		   select rownum num, A.* from (
         		select * from board order by bId desc) A
-    		where rownum <= (#{curPage}-1) * #{listCount} + #{listCount} ) B
+    		where rownum <= (#{curPage}-1) * #{listCount} + #{listCount} 
+    			and content like '%' || #{search} || '%' ) B
 		where B.num >= (#{curPage}-1) * #{listCount} + 1
 		]]>
 	</select>
@@ -40,8 +41,13 @@
 		 where bId = #{bId}
 	</update>
 	
-	<select id="selectPageCount" resultType="int">  
-		select count(*) from board
+	<select id="selectPageCount" resultType="int" parameterType="com.study.board.pageInfo.PageInfo">  
+		select count(*) from board 
+		 where content like '%' || #{search} || '%'
 	</select>	
 	
+	<select id="searchBoard" parameterType="com.study.board.dto.BoardDto">  
+		select * from board
+		where content = #{content}
+	</select>
 </mapper>

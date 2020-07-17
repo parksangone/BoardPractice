@@ -21,7 +21,18 @@
 		}
 		
 	});
+
+	// 검색 
+	function searchDo() {
+		var search = $('#search').val();
+		window.location.replace("/board/list?curPage="+ 1 + "&search="+search);
+	}
 	
+	// 페이지로 이동 (페이지)
+	function goPage(curPage) {
+		var search = '${pageInfo.search}';
+		window.location.replace("/board/list?curPage="+curPage + "&search=" + search);
+	}
 </script>
 </head>
 <body>
@@ -48,16 +59,22 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<br>
+	<br>	
 	<div id="paging">
-		<a style="text-decoration:none" href="/board/list?curPage=${pageInfo.curPage - 1}">◀</a> 
+		<a style="text-decoration:none" href="#" onclick="goPage(${pageInfo.curPage - 1})">◀</a> 
 		<c:forEach var="page" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" step="1">
-			<a style="text-decoration:none" href="/board/list?curPage=${page}">${page}</a>
+			<a style="text-decoration:none" href="#" onclick="goPage(${page})">${page}</a>
 		</c:forEach>
-		<a style="text-decoration:none" href="/board/list?curPage=${pageInfo.curPage + 1}">▶</a>
+		<a style="text-decoration:none" href="#" onclick="goPage(${pageInfo.curPage + 1})">▶</a>
 	</div>
+	<br>
+	
+	<form id="searchForm">		
+		<input type="text" id="search" name="search" placeholder="검색어를 입력해주세요." >
+		<input type="button" onclick="searchDo()" value="검색">
+	</form>
 	
 	<br>
-	<a class="member" href="write">글작성</a><br>
+	<a class="member" href="/board/write">글작성</a><br>
 </body>
 </html>
